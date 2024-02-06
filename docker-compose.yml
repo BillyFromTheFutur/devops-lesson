@@ -3,12 +3,9 @@ version: '3.7'
 services:
     backend:
         container_name: backend
-        build:
-            context: backend
+        image: kingkongbilly/backend:1.0
         networks:
             - app-network
-        ports:
-            - "8080:8080"
         depends_on:
             - database
         environment:
@@ -17,8 +14,7 @@ services:
           - DB_PASSWORD=pwd
     database:
         container_name: database
-        build:
-          context: database
+        image: kingkongbilly/database:1.0
         environment:
           - POSTGRES_USER=usr
           - POSTGRES_DB=db
@@ -28,12 +24,11 @@ services:
 
     httpd:
         container_name: httpd
-        build:
-            context: httpd
+        image: kingkongbilly/httpd:1.0
         networks: 
             - app-network
         ports:
-            - "8888:80"
+            - "80:80"
         depends_on:
             - database
             - backend
