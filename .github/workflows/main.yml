@@ -16,6 +16,8 @@ jobs:
         with:
           java-version: "17"
           working-directory: /backend
+          distribution: "temurin"
+          architecture: x64
 
       - name: Build and test with Maven
         run: mvn clean verify --file /backend/pom.xml
