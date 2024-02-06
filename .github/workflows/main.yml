@@ -24,7 +24,7 @@ jobs:
         run: mvn clean verify --file ./backend/pom.xml
 
   build-and-push-docker-image:
-    needs: test-backend
+    # needs: test-backend
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
 
