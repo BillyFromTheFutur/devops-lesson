@@ -26,7 +26,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
   build-and-push-docker-image:
-    # needs: test-backend
+    needs: test-backend
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
 
@@ -40,16 +40,18 @@ jobs:
         with:
           context: ./backend
           tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-simple-api:latest
+          push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push database
         uses: docker/build-push-action@v3
         with:
           context: ./database
           tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-database:latest
-          # DO the same for database
+          push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push httpd
         uses: docker/build-push-action@v3
         with:
           context: ./httpd
           tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-httpd:latest
+          push: ${{ github.ref == 'refs/heads/main' }}
