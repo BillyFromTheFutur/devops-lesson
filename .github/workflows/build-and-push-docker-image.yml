@@ -1,4 +1,4 @@
-name: CI devops 2023
+name: CI devops 2023 BUILD AND PUSH DOCKER
 on:
   #to begin you want to launch this job in main and develop
   push:
