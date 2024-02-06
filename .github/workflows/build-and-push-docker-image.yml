@@ -3,28 +3,12 @@ on:
   #to begin you want to launch this job in main and develop
   push:
     branches:
-      - main
+      - master
   pull_request:
 
 jobs:
-  build-and-test-with-maven:
-    runs-on: ubuntu-22.04
-    steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - uses: actions/checkout@v2.5.0
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: "17"
-          working-directory: /backend
-          distribution: "temurin"
-          # architecture: x64
-
-      - name: Build and test with Maven
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=billyfromthefutur_devopslesson -Dsonar.organization=billyfromthefutur -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./backend/pom.xml
-
   build-and-push-docker-image:
-    needs: build-and-test-with-maven
+    needs: test-backend
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
 
