@@ -23,31 +23,31 @@ jobs:
       - name: Build and test with Maven
         run: mvn clean verify --file ./backend/pom.xml
 
-build-and-push-docker-image:
-  needs: test-backend
-  # run only when code is compiling and tests are passing
-  runs-on: ubuntu-22.04
+  build-and-push-docker-image:
+    needs: test-backend
+    # run only when code is compiling and tests are passing
+    runs-on: ubuntu-22.04
 
-  # steps to perform in job
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v2.5.0
+    # steps to perform in job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.5.0
 
-    - name: Build image and push backend
-      uses: docker/build-push-action@v3
-      with:
-        context: ./backend
-        tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-simple-api:latest
+      - name: Build image and push backend
+        uses: docker/build-push-action@v3
+        with:
+          context: ./backend
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-simple-api:latest
 
-    - name: Build image and push database
-      uses: docker/build-push-action@v3
-      with:
-        context: ./database
-        tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-database:latest
-        # DO the same for database
+      - name: Build image and push database
+        uses: docker/build-push-action@v3
+        with:
+          context: ./database
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-database:latest
+          # DO the same for database
 
-    - name: Build image and push httpd
-      uses: docker/build-push-action@v3
-      with:
-        context: ./httpd
-        tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-httpd:latest
+      - name: Build image and push httpd
+        uses: docker/build-push-action@v3
+        with:
+          context: ./httpd
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-httpd:latest
