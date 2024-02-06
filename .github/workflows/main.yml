@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  test-backend:
+  build-and-test-with-maven:
     runs-on: ubuntu-22.04
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -21,7 +21,7 @@ jobs:
           # architecture: x64
 
       - name: Build and test with Maven
-        run: mvn clean verify --file ./backend/pom.xml
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=devops-2023 -Dsonar.organization=devops-school -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./backend/pom.xml
 
   build-and-push-docker-image:
     needs: test-backend
