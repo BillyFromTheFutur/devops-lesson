@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+    backend:
+        container_name: backend
+        build:
+            context: backend
+        networks:
+            - app-network
+        ports:
+            - "8080:8080"
+        depends_on:
+            - database
+        environment:
+          - DB_ADRESS=database
+          - DB_USER=usr
+          - DB_PASSWORD=pwd
+    database:
+        container_name: database
+        build:
+          context: database
+        environment:
+          - POSTGRES_USER=usr
+          - POSTGRES_DB=db
+          - POSTGRES_PASSWORD=pwd
+        networks: 
+          - app-network
+
+    httpd:
+        container_name: httpd
+        build:
+            context: httpd
+        networks: 
+            - app-network
+        ports:
+            - "8888:80"
+        depends_on:
+            - database
+            - backend
+        volumes:
+            - db_data:/var/lib/postgresql/data
+
+networks:
+    app-network: 
+volumes:
+  db_data:
