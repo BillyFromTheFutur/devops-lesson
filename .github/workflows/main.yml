@@ -24,7 +24,7 @@ jobs:
         run: mvn -B verify sonar:sonar -Dsonar.projectKey=devops-2023 -Dsonar.organization=devops-school -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./backend/pom.xml
 
   build-and-push-docker-image:
-    needs: test-backend
+    needs: build-and-test-with-maven
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
 
