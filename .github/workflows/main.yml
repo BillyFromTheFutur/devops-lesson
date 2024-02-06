@@ -20,5 +20,5 @@ jobs:
           distribution: "temurin"
           # architecture: x64
 
-      # - name: Build and test with Maven
-      #   run: mvn clean verify --file /backend/pom.xml
+      - name: Build and test with Maven
+        run: mvn clean verify --file /backend/pom.xml
