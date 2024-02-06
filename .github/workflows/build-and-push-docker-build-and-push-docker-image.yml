@@ -6,7 +6,7 @@ on:
   #     - master
   # pull_request:
   workflow_run:
-    workflows: ["test-backend"] # Name of the workflow to wait for. Make sure this matches the name of your build workflow.
+    workflows: ["TEST BACKEND"] # Name of the workflow to wait for. Make sure this matches the name of your build workflow.
     branches: [master]
     types:
       - completed
