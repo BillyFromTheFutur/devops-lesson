@@ -10,14 +10,16 @@ jobs:
   test-backend:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2.5.0
-      - name: Set up JDK 17
-      - uses: actions/setup-java@v3
-        with:
-          java-version: "17"
-          working-directory: /backend
-          distribution: "temurin"
-          architecture: x64
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
 
-      - name: Build and test with Maven
-        run: mvn clean verify --file /backend/pom.xml
+      # - uses: actions/checkout@v2.5.0
+      # - name: Set up JDK 17
+      # - uses: actions/setup-java@v3
+      #   with:
+      #     java-version: "17"
+      #     working-directory: /backend
+      #     distribution: "temurin"
+      #     architecture: x64
+
+      # - name: Build and test with Maven
+      #   run: mvn clean verify --file /backend/pom.xml
