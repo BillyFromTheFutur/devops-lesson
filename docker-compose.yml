@@ -34,7 +34,17 @@ services:
             - backend
         volumes:
             - db_data:/var/lib/postgresql/data
-
+    devops-front:
+        container_name: devops-front
+        image: kingkongbilly/devops-front:1.0
+        networks: 
+            - app-network
+        ports:
+            - "80:80"
+        depends_on:
+            - database
+            - backend
+            - httpd
         
 networks:
     app-network: 
