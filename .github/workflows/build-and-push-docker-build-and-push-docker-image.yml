@@ -48,5 +48,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./devops-frontend
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops-frontend:latest
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-frontend:latest
           push: ${{ github.ref == 'refs/heads/main' }}

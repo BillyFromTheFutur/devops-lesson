@@ -1,0 +1,10 @@
+---
+# tasks file for roles/launch-frontend
+
+- name: Launch frontend
+  community.docker.docker_container:
+    network_mode: "app-network"
+    name: frontend
+    image: "kingkongbilly/tp-devops-frontend:latest"
+    ports:
+      - "8080:80"
