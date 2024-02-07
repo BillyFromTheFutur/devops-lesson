@@ -1,0 +1,7 @@
+- name: Basic Server
+  hosts: ceif-edine.marouani.takima.cloud
+  remote_user: centos
+  become: yes
+  become_method: sudo
+  vars:
+    ansible_ssh_private_key_file: "/id_rsa"
