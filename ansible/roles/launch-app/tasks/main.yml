@@ -6,9 +6,7 @@
     network_mode: "app-network"
     name: backend
     image: "kingkongbilly/tp-devops-simple-api:latest"
-    # ports:
-    #   - "8080:8080"
     env:
-      DB_URL: "jdbc:postgresql://database:5432/db"
-      DB_USER: "usr"
-      DB_PASSWORD: "pwd"
+      DB_URL: "{{ DB_URL }}"
+      DB_USER: "{{ POSTGRES_USER }}"
+      DB_PASSWORD: "{{ POSTGRES_PASSWORD }}"

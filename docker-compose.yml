@@ -35,6 +35,7 @@ services:
         volumes:
             - db_data:/var/lib/postgresql/data
 
+        
 networks:
     app-network: 
 volumes:

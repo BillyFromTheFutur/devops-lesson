@@ -1,30 +1,12 @@
 - hosts: all
   gather_facts: false
   become: true
-
-  # Install Docker
-  tasks:
-    - name: Run install-requirement/main.yaml
-      ansible.builtin.include_role:
-        name: install-requirement
-        tasks_from: main
-    - name: Install docker/main.yaml
-      ansible.builtin.include_role:
-        name: docker
-        tasks_from: main
-    - name: Create network/main.yaml
-      ansible.builtin.include_role:
-        name: create-network
-        tasks_from: main
-    - name: Launch database/main.yaml
-      ansible.builtin.include_role:
-        name: launch-database
-        tasks_from: main
-    - name: Launch app/main.yaml
-      ansible.builtin.include_role:
-        name: launch-app
-        tasks_from: main
-    - name: Launch proxy/main.yaml
-      ansible.builtin.include_role:
-        name: launch-proxy
-        tasks_from: main
+  vars_files:
+    - secrets.yml
+  roles:
+    - install-requirement
+    - docker
+    - create-network
+    - launch-database
+    - launch-app
+    - launch-proxy
