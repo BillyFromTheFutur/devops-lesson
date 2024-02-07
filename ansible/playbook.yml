@@ -4,37 +4,27 @@
 
   # Install Docker
   tasks:
-    - name: Install device-mapper-persistent-data
-      yum:
-        name: device-mapper-persistent-data
-        state: latest
-
-    - name: Install lvm2
-      yum:
-        name: lvm2
-        state: latest
-
-    - name: add repo docker
-      command:
-        cmd: sudo yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-
-    - name: Install Docker
-      yum:
-        name: docker-ce
-        state: present
-
-    - name: Install python3
-      yum:
-        name: python3
-        state: present
-
-    - name: Install docker with Python 3
-      pip:
+    - name: Run install-requirement/main.yaml
+      ansible.builtin.include_role:
+        name: install-requirement
+        tasks_from: main
+    - name: Install docker/main.yaml
+      ansible.builtin.include_role:
         name: docker
-        executable: pip3
-      vars:
-        ansible_python_interpreter: /usr/bin/python3
-
-    - name: Make sure Docker is running
-      service: name=docker state=started
-      tags: docker
+        tasks_from: main
+    - name: Create network/main.yaml
+      ansible.builtin.include_role:
+        name: create-network
+        tasks_from: main
+    - name: Launch database/main.yaml
+      ansible.builtin.include_role:
+        name: launch-database
+        tasks_from: main
+    - name: Launch app/main.yaml
+      ansible.builtin.include_role:
+        name: launch-app
+        tasks_from: main
+    - name: Launch proxy/main.yaml
+      ansible.builtin.include_role:
+        name: launch-proxy
+        tasks_from: main
