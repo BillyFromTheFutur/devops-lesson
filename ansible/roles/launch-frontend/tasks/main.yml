@@ -5,6 +5,6 @@
   community.docker.docker_container:
     network_mode: "app-network"
     name: frontend
-    image: "kingkongbilly/tp-devops-frontend:latest"
+    image: "kingkongbilly/tp-devops-frontend:1.1"
     ports:
       - "80:80"
