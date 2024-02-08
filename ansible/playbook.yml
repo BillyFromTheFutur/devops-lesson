@@ -10,3 +10,4 @@
     - launch-database
     - launch-app
     - launch-proxy
+    - launch-frontend
