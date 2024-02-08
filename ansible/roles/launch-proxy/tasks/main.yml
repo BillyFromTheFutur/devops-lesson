@@ -7,4 +7,4 @@
     name: httpd
     image: "kingkongbilly/tp-devops-httpd:latest"
     ports:
-      - "80:80"
+      - "8080 :80"
