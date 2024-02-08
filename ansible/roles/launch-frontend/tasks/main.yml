@@ -6,5 +6,5 @@
     network_mode: "app-network"
     name: frontend
     image: "kingkongbilly/tp-devops-frontend:latest"
-    # ports:
-    #   - "80:80"
+    ports:
+      - "80:80"
