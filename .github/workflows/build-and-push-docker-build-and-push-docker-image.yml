@@ -1,22 +1,18 @@
 name: BUILD AND PUSH DOCKER
 on:
-  #to begin you want to launch this job in main and develop
-  # push:
-  #   branches:
-  #     - master
-  # pull_request:
   workflow_run:
     workflows: ["TEST BACKEND"] # Name of the workflow to wait for. Make sure this matches the name of your build workflow.
     branches: [master]
     types:
       - completed
+      # Check if the workflow TEST BACKEND run was successful
 jobs:
   build-and-push-docker-image:
     # needs: test-backend
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    # steps to perform in job
+    # the following steps automate the building and pushing of the docker images to DockerHub after a successful build and test of the backend
     steps:
       - name: Checkout code
         uses: actions/checkout@v2.5.0

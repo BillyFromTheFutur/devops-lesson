@@ -1,14 +1,20 @@
 version: '3.7'
 
 services:
+# Define the differents containers that will be running
     backend:
+        # Define the name of the container
         container_name: backend
+        # Define the image that will be used to create the container
         image: kingkongbilly/backend:1.0
         networks:
+        # Define the network that the container will be using
             - app-network
         depends_on:
+        # Define the dependencies of the container, it will wait for the database to be up before starting
             - database
         environment:
+        # Define the environment variables
           - DB_ADRESS=database
           - DB_USER=usr
           - DB_PASSWORD=pwd
@@ -28,11 +34,13 @@ services:
         networks: 
             - app-network
         ports:
+        # Define the ports that will be used to access the container
             - "80:80"
         depends_on:
             - database
             - backend
         volumes:
+        # Define the volumes that will be used by the container, so the data can be persisted
             - db_data:/var/lib/postgresql/data
     devops-front:
         container_name: devops-front
@@ -47,6 +55,8 @@ services:
             - httpd
         
 networks:
+# Define the network that will be used by the containers
     app-network: 
 volumes:
+# Define the volumes that will be used by the containers
   db_data:
