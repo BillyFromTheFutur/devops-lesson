@@ -1,8 +1,10 @@
 - hosts: all
   gather_facts: false
   become: true
+  # Give the path to the environnement variables file
   vars_files:
     - secrets.yml
+  # Roles to be executed
   roles:
     - install-requirement
     - docker

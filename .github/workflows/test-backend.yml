@@ -1,6 +1,6 @@
 name: TEST BACKEND
 on:
-  #to begin you want to launch this job in main and develop
+  #to begin you want to launch this job on a push on master or develop
   push:
     branches:
       - develop
@@ -8,9 +8,14 @@ on:
   pull_request:
 
 jobs:
+  #job to test the backend
   test-backend:
+    #Define the os that the github action will run on
     runs-on: ubuntu-22.04
     steps:
+      #Utilizes the actions/setup-java action to configure the Java Development Kit (JDK) version 17
+      #for the job. The temurin distribution is specified but it's not necessary, it was done just
+      #by casually following the documentation
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - uses: actions/checkout@v2.5.0
       - name: Set up JDK 17
@@ -22,4 +27,7 @@ jobs:
           # architecture: x64
 
       - name: Build and test with Maven
+        #The command that will be run on the instance of the job inside the github action
+        #The command will build the project and run the tests, it also includes integration
+        # with SonarCloud for code quality analysis, using a project key, organization, and host URL specific
         run: mvn -B verify sonar:sonar -Dsonar.projectKey=billyfromthefutur_devopslesson -Dsonar.organization=billyfromthefutur -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./backend/pom.xml
